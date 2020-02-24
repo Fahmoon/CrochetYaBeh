@@ -23,8 +23,8 @@ public class DeleteMeGameManager : MonoBehaviour
     private List<Color>     _levelColors;
     [SerializeField]
     private List<Image>     _levelButtons;
-    [SerializeField]
-    private Slider          _levelProgress;
+    //[SerializeField]
+    public Slider          _levelProgress;
     [SerializeField] MeshRenderer objMesh;
      [SerializeField] Transform anchor;
     private Texture2D       _myTex;
@@ -36,6 +36,8 @@ public class DeleteMeGameManager : MonoBehaviour
         TransferAlpha(_modelTex);
 
         _mat.mainTexture = _myTex;
+
+     
 
         ManipulateAlpha(_myTex, 0f);
 
