@@ -19,9 +19,7 @@ public class ComparePositions : IComparer<Vector3>
             ret = 1;
         if (ret == 0)
         {
-
             ret = (Vector3.SignedAngle(Vector3.left, pos2, Vector3.up) + 180).CompareTo(Vector3.SignedAngle(Vector3.left, pos1, Vector3.up) + 180);
-
         }
         if (ret == 0)
         {
@@ -47,12 +45,13 @@ public class GetShapePointsSpline : MonoBehaviour
     public float accuracy;
     public Transform anchor;
     float distanceTravelled;
-   public List<Vector3> verticies = new List<Vector3>();
+    public List<Vector3> verticies = new List<Vector3>();
     int currentVertex;
     int i;
     DeleteMeGameManager deleteMeGame;
     public PathCreation.EndOfPathInstruction endOfPathInstruction;
-
+    float radiusModifier;
+    public float radiusModifierFactor;
     private void Awake()
     {
         instance = this;
@@ -68,7 +67,7 @@ public class GetShapePointsSpline : MonoBehaviour
         verticies.Sort(sc);
         anchor.position = verticies[0] + transform.position;
         ourCreator.bezierPath.SetPoint(0, verticies[0] + transform.position, true);
-                ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[1] + transform.position, true);
+        ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[1] + transform.position, true);
         ourCreator.bezierPath.IsClosed = true;
         ourCreator.bezierPath.IsClosed = false;
         for (int i = 2; i < verticies.Count; i++)
@@ -79,7 +78,7 @@ public class GetShapePointsSpline : MonoBehaviour
         }
         // ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[verticies.Count - 1] + transform.position, true);
         //  StartCoroutine(SmoothScale());
-        // StartCoroutine(draw());
+   //     StartCoroutine(draw());
     }
 
     IEnumerator draw()
@@ -144,11 +143,18 @@ public class GetShapePointsSpline : MonoBehaviour
             //{
             //    currentVertex += vertexSpeed;
 
-            //}            if (anchor.position != verticies[currentVertex] + transform.position)
-            distanceTravelled += speed;
+            //}            if (anchor.position != verticies[currentVertex] + transform.position
+            distanceTravelled += Mathf.Clamp(speed - radiusModifierFactor/(Vector3.Distance(Vector3.zero, new Vector3(anchor.position.x, 0, anchor.position.z))+0.000001f) , 0, 100000);
             anchor.position = ourCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            anchor.rotation = ourCreator.path.GetRotationAtDistance(distanceTravelled, endOfPathInstruction);
-
+            //if () < 0.035f)
+            //{
+            //    Debug.Log("hi");
+            //    radiusModifier = radiusModifierFactor;
+            //}
+            //else
+            //{
+            //    radiusModifier = 0;
+            //}
         }
     }
 }
