@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44240394, g: 0.49146128, b: 0.5713207, a: 1}
+  m_IndirectSpecularColor: {r: 0.44240373, g: 0.49146056, b: 0.57132006, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -448,6 +448,8 @@ GameObject:
   - component: {fileID: 341232152}
   - component: {fileID: 341232154}
   - component: {fileID: 341232153}
+  - component: {fileID: 341232156}
+  - component: {fileID: 341232155}
   m_Layer: 5
   m_Name: Color 1
   m_TagString: Untagged
@@ -511,6 +513,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341232151}
   m_CullTransparentMesh: 0
+--- !u!114 &341232155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341232151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8e571d643d845f9bc60fc17ed560c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &341232156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 341232151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: ChangeColor
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 341232155}
+            m_ObjectArgumentAssemblyTypeName: AssociatedColor, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: StopPainting
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &372095543
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,6 +1875,8 @@ GameObject:
   - component: {fileID: 1343319750}
   - component: {fileID: 1343319752}
   - component: {fileID: 1343319751}
+  - component: {fileID: 1343319754}
+  - component: {fileID: 1343319753}
   m_Layer: 5
   m_Name: Color 3
   m_TagString: Untagged
@@ -1880,6 +1940,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1343319749}
   m_CullTransparentMesh: 0
+--- !u!114 &1343319753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343319749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8e571d643d845f9bc60fc17ed560c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1343319754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1343319749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: ChangeColor
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1343319753}
+            m_ObjectArgumentAssemblyTypeName: AssociatedColor, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: StopPainting
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1347372903
 GameObject:
   m_ObjectHideFlags: 0
@@ -1891,6 +2007,8 @@ GameObject:
   - component: {fileID: 1347372904}
   - component: {fileID: 1347372906}
   - component: {fileID: 1347372905}
+  - component: {fileID: 1347372908}
+  - component: {fileID: 1347372907}
   m_Layer: 5
   m_Name: Color 2
   m_TagString: Untagged
@@ -1954,6 +2072,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347372903}
   m_CullTransparentMesh: 0
+--- !u!114 &1347372907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347372903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae8e571d643d845f9bc60fc17ed560c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _color: {r: 0, g: 0, b: 0, a: 0}
+--- !u!114 &1347372908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347372903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: ChangeColor
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1347372907}
+            m_ObjectArgumentAssemblyTypeName: AssociatedColor, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - eventID: 3
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1745899702}
+          m_MethodName: StopPainting
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1469590820
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,6 +2575,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1745899704}
   - component: {fileID: 1745899705}
+  - component: {fileID: 1745899702}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -2408,6 +2583,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1745899702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745899701}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f097502e0030b42df9de35aa8370bc4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _levelProgression: {fileID: 11400000, guid: 47ae41a0c26a74f20b8dd7a71c42e8d0, type: 2}
 --- !u!4 &1745899704
 Transform:
   m_ObjectHideFlags: 0
@@ -2440,29 +2628,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2736eaf5e7ff14d43907048700e6ddd0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knittingDelay: 0
   _knittingStep: 16
-  _mat: {fileID: 2100000, guid: 2975b46f5cb3a47b8a0f40107ea39eff, type: 2}
-  _model: {fileID: 2009451328}
-  _modelTex: {fileID: 2800000, guid: 0bb140144fdd845519341337b019c4d7, type: 3}
-  _modelMeshFilter: {fileID: 2009451330}
-  _levelColors:
-  - color: {r: 1, g: 0, b: 0, a: 1}
-    percent: 0
-    pixelsCounter: 0
-  - color: {r: 0, g: 1, b: 0.11449838, a: 1}
-    percent: 0
-    pixelsCounter: 0
-  - color: {r: 0, g: 0.018627167, b: 1, a: 1}
-    percent: 0
-    pixelsCounter: 0
   _levelButtons:
   - {fileID: 341232153}
   - {fileID: 1347372905}
   - {fileID: 1343319751}
-  _levelProgress: {fileID: 901415072}
-  objMesh: {fileID: 2009451329}
-  anchor: {fileID: 1705879386}
+  _levelProgression: {fileID: 11400000, guid: 47ae41a0c26a74f20b8dd7a71c42e8d0, type: 2}
+  _levelReference: {fileID: 11400000, guid: f0857e535ce054738b85ecfba973ed94, type: 2}
+  _model: {fileID: 2009451328}
+  _modelMeshFilter: {fileID: 2009451330}
+  _modelTex: {fileID: 2800000, guid: 0bb140144fdd845519341337b019c4d7, type: 3}
+  _material: {fileID: 2100000, guid: 2975b46f5cb3a47b8a0f40107ea39eff, type: 2}
 --- !u!1001 &1806606474
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2822,12 +2998,6 @@ Transform:
 --- !u!1 &2009451328 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 543a2fef188a44c5fbd33e729cc428a8,
-    type: 3}
-  m_PrefabInstance: {fileID: 1264230877}
-  m_PrefabAsset: {fileID: 0}
---- !u!23 &2009451329 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: -1504981713932161579, guid: 543a2fef188a44c5fbd33e729cc428a8,
     type: 3}
   m_PrefabInstance: {fileID: 1264230877}
   m_PrefabAsset: {fileID: 0}
