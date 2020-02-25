@@ -56,6 +56,12 @@ TextureImporter:
   - first:
       213: 1824439732157930370
     second: color
+  - first:
+      213: 3449518171935125709
+    second: done
+  - first:
+      213: 6973341628372400424
+    second: logo
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -206,6 +212,27 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: done
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 1286
+        width: 481
+        height: 244
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 3449518171935125709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: green
       rect:
         serializedVersion: 2
@@ -230,7 +257,7 @@ TextureImporter:
       name: loading
       rect:
         serializedVersion: 2
-        x: 2
+        x: 576
         y: 1976
         width: 471
         height: 70
@@ -243,6 +270,27 @@ TextureImporter:
       bones: []
       spriteID: 
       internalID: 813279235716360807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: logo
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 991
+        width: 915
+        height: 539
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 
+      internalID: 6973341628372400424
       vertices: []
       indices: 
       edges: []
@@ -272,7 +320,7 @@ TextureImporter:
       name: progress
       rect:
         serializedVersion: 2
-        x: 475
+        x: 1049
         y: 1976
         width: 471
         height: 70
@@ -314,7 +362,7 @@ TextureImporter:
       name: replay
       rect:
         serializedVersion: 2
-        x: 1460
+        x: 214
         y: 1867
         width: 179
         height: 179
@@ -335,7 +383,7 @@ TextureImporter:
       name: settings
       rect:
         serializedVersion: 2
-        x: 1641
+        x: 395
         y: 1867
         width: 179
         height: 179
@@ -356,7 +404,7 @@ TextureImporter:
       name: shadow
       rect:
         serializedVersion: 2
-        x: 1160
+        x: 1522
         y: 1892
         width: 298
         height: 154
@@ -377,7 +425,7 @@ TextureImporter:
       name: star
       rect:
         serializedVersion: 2
-        x: 948
+        x: 2
         y: 1946
         width: 104
         height: 100
@@ -398,7 +446,7 @@ TextureImporter:
       name: star_holder
       rect:
         serializedVersion: 2
-        x: 1054
+        x: 108
         y: 1946
         width: 104
         height: 100
