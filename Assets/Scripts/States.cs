@@ -1,0 +1,1 @@
+﻿public enum GameStates { MainMenu, PrePlay, Playing, PostPlay, GameOver }
