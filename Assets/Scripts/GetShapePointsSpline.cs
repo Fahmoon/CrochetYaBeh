@@ -133,28 +133,12 @@ public class GetShapePointsSpline : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (knitting)
+        if (LevelHandler.currentPos!=Vector3.zero)
         {
-            //if (anchor.position != verticies[currentVertex] + transform.position)
-            //{
-            //    anchor.position = Vector3.MoveTowards(anchor.position, verticies[currentVertex] + transform.position, speed);
-            //}
-            //else
-            //{
-            //    currentVertex += vertexSpeed;
 
-            //}            if (anchor.position != verticies[currentVertex] + transform.position
-            distanceTravelled += Mathf.Clamp(speed - radiusModifierFactor/(Vector3.Distance(Vector3.zero, new Vector3(anchor.position.x, 0, anchor.position.z))+0.000001f) , 0, 100000);
-            anchor.position = ourCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            //if () < 0.035f)
-            //{
-            //    Debug.Log("hi");
-            //    radiusModifier = radiusModifierFactor;
-            //}
-            //else
-            //{
-            //    radiusModifier = 0;
-            //}
+            //distanceTravelled += Mathf.Clamp(speed - radiusModifierFactor/(Vector3.Distance(Vector3.zero, new Vector3(anchor.position.x, 0, anchor.position.z))+0.000001f) , 0, 100000);
+            //anchor.position = ourCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
+            anchor.position = LevelHandler.currentPos;
         }
     }
 }

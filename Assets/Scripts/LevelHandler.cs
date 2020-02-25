@@ -22,6 +22,8 @@ public class ColorAndPercent
 }
 public class LevelHandler : MonoBehaviour
 {
+    Vector3[] points;
+    public static Vector3 currentPos;
     #region Private Fields
     [Header("LEVEL CONSTs")]
     [SerializeField, Range(1, 100)]
@@ -157,7 +159,11 @@ public class LevelHandler : MonoBehaviour
 
                     _currentColor.pixelsCounter += _pixelsCounter;
                     _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
-
+                    points = _modelMeshFilter.mesh.GetMappedPoints(new Vector2(widthIterator / _myTex.width, heightIterator / _myTex.height));
+                    if (points.Length > 0)
+                    {
+                        currentPos = points[0];
+                    }
                     for (int i = 0; i < _pixelsCounter; i++)
                     {
                         pixA[i].r *= _currentColor.color.r;
