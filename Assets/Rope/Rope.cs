@@ -108,7 +108,5 @@ public class Rope : MonoBehaviour
         DrawRope();
         SimulateRope();
     }
-    private void LateUpdate()
-    {
-    }
+  
 }

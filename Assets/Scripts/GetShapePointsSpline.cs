@@ -37,6 +37,7 @@ public class ComparePositions : IComparer<Vector3>
 }
 public class GetShapePointsSpline : MonoBehaviour
 {
+    public LevelProgression myScriptableObject;
     public Mesh myMesh;
     public PathCreation.PathCreator ourCreator;
     public static GetShapePointsSpline instance;
@@ -76,8 +77,7 @@ public class GetShapePointsSpline : MonoBehaviour
             ourCreator.bezierPath.AddSegmentToEnd(verticies[i] + transform.position);
 
         }
-        // ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[verticies.Count - 1] + transform.position, true);
-        //  StartCoroutine(SmoothScale());
+  
    //     StartCoroutine(draw());
     }
 
@@ -100,11 +100,11 @@ public class GetShapePointsSpline : MonoBehaviour
     bool knitting;
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K))
+        if (myScriptableObject.IsPainting)
         {
             knitting = true;
         }
-        if (Input.GetKeyUp(KeyCode.K))
+        if (!myScriptableObject.IsPainting)
         {
             knitting = false;
         }

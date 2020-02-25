@@ -5,12 +5,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [System.Serializable]
-public  class ColorAndPercent
+public class ColorAndPercent
 {
     public Color color;
     public float percent;
     [HideInInspector] public float pixelsCounter;
-    [HideInInspector] public bool  compared;
+    [HideInInspector] public bool compared;
 
     public ColorAndPercent(ColorAndPercent col)
     {
@@ -25,29 +25,32 @@ public class LevelHandler : MonoBehaviour
     #region Private Fields
     [Header("LEVEL CONSTs")]
     [SerializeField, Range(1, 100)]
-    private int                     _knittingStep;
+    private int _knittingStep;
     [SerializeField]
-    private List<Image>             _levelButtons;
+    private List<Image> _levelButtons;
     [SerializeField]
-    private LevelProgression        _levelProgression;
+    private LevelProgression _levelProgression;
     [SerializeField]
-    private LevelReference          _levelReference;
+    private LevelReference _levelReference;
+    [SerializeField]
+    LineRenderer myLine;
+    [SerializeField]
+    SpriteRenderer myYarnBall;
     [Space]
     [Header("MODEL VARs")]
     [SerializeField]
-    private GameObject              _model;
+    private GameObject _model;
     [SerializeField]
-    private MeshFilter              _modelMeshFilter;
+    private MeshFilter _modelMeshFilter;
     [SerializeField]
-    private Texture2D               _modelTex;
+    private Texture2D _modelTex;
     [SerializeField]
-    private Material                _material;
-
-    private List<ColorAndPercent>   _levelColors = new List<ColorAndPercent>();
-    private Texture2D               _myTex;
-    private int                     _progessCounter;
-    private float                   _pixelsCount;
-    private ColorAndPercent         _currentColor;
+    private Material _material;
+    private List<ColorAndPercent> _levelColors = new List<ColorAndPercent>();
+    private Texture2D _myTex;
+    private int _progessCounter;
+    private float _pixelsCount;
+    private ColorAndPercent _currentColor;
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
@@ -70,7 +73,8 @@ public class LevelHandler : MonoBehaviour
         _levelProgression.ColorAndPercents.Clear();
         _levelProgression.StarsCount = 0;
         _levelProgression.Progress = 0;
-        _levelProgression.CurrentColor = new Color();
+
+        OnColorChanging(_levelReference.RefColorsWithPercents[0]);
 
         if (_levelColors.Count != _levelButtons.Count)
         {
@@ -95,7 +99,7 @@ public class LevelHandler : MonoBehaviour
             else
                 _levelButtons[i].gameObject.GetComponent<AssociatedColor>().Color = _levelColors[i].color;
         }
-        
+
         _myTex = TransferAlpha(_modelTex);
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
@@ -104,6 +108,9 @@ public class LevelHandler : MonoBehaviour
     private void OnColorChanging(ColorAndPercent color)
     {
         _currentColor = color;
+        myLine.startColor = color.color;
+        myLine.endColor = color.color;
+        myYarnBall.color = color.color;
     }
     private void GetAllTextures(GameObject obj)
     {
@@ -150,7 +157,7 @@ public class LevelHandler : MonoBehaviour
 
                     _currentColor.pixelsCounter += _pixelsCounter;
                     _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
-                    
+
                     for (int i = 0; i < _pixelsCounter; i++)
                     {
                         pixA[i].r *= _currentColor.color.r;
@@ -202,7 +209,7 @@ public class LevelHandler : MonoBehaviour
     }
     private Texture2D TransferAlpha(Texture2D A, Texture2D B = null)
     {
-        if(B == null)
+        if (B == null)
             B = new Texture2D(A.width, A.height, TextureFormat.ARGB32, false);
 
         Color pixA;
