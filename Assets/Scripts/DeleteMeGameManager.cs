@@ -4,6 +4,20 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public  class ColorAndPercent
+{
+    public Color color;
+    public float percent;
+    [HideInInspector]
+    public float pixelsCounter;
+
+    public ColorAndPercent(Color col, float per)
+    {
+        this.color = col;
+        this.percent = per;
+    }
+}
 public class DeleteMeGameManager : MonoBehaviour
 {
     [SerializeField, Range(0, 0.5f)]
@@ -20,7 +34,7 @@ public class DeleteMeGameManager : MonoBehaviour
     [SerializeField]
     private MeshFilter      _modelMeshFilter;
     [SerializeField]
-    private List<Color>     _levelColors;
+    private ColorAndPercent[] _levelColors;
     [SerializeField]
     private List<Image>     _levelButtons;
     //[SerializeField]
@@ -28,7 +42,9 @@ public class DeleteMeGameManager : MonoBehaviour
     [SerializeField] MeshRenderer objMesh;
      [SerializeField] Transform anchor;
     private Texture2D       _myTex;
-    private int             _progessCounter;
+    private int             _progessCounter, _colorOnePercent, _colorTwoPercent, _colorThreePercent;
+    private float           _pixelsCount;
+    
 
     #region MonoBehavior Callbacks
     void Start()
@@ -41,9 +57,16 @@ public class DeleteMeGameManager : MonoBehaviour
 
         ManipulateAlpha(_myTex, 0f);
 
-        int counter = _levelButtons.Count;
+
+        foreach (ColorAndPercent item in _levelColors)
+        {
+            item.percent = 0f;
+            item.pixelsCounter = 0f;
+        }
+        
+        int counter = _levelColors.Length;
         for (int i = 0; i < counter; i++)
-            _levelButtons[i].color = _levelColors[i];
+            _levelButtons[i].color = _levelColors[i].color;
 
        // Vector3 worldPos = UvTo3D(_modelMeshFilter.mesh.uv[2], _modelMeshFilter);
         //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -78,6 +101,8 @@ public class DeleteMeGameManager : MonoBehaviour
                 texHeight = A.height,
                 heightIterator = 0,
                 widthIterator;
+        _pixelsCount = texHeight * texWidth;
+
         if (texWidth != texHeight || texWidth % _knittingStep != 0)
             yield return null;
 
@@ -92,17 +117,28 @@ public class DeleteMeGameManager : MonoBehaviour
                     pixA = _modelTex.GetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep);
 
                     int _pixelsCounter = pixA.Length;
-                    Color currentColor = _levelColors[0];
+                    Color currentColor = _levelColors[0].color;
+                    _progessCounter += _pixelsCounter;
 
                     if (Input.GetKey(KeyCode.J))
-                        currentColor = _levelColors[0];
+                    {
+                        currentColor = _levelColors[0].color;
+                        _levelColors[0].pixelsCounter += _pixelsCounter;
+                        _levelColors[0].percent =(_levelColors[0].pixelsCounter/ _pixelsCount) * 100f;
+                    }
                     if (Input.GetKey(KeyCode.K))
-                        currentColor = _levelColors[1];
+                    {
+                        currentColor = _levelColors[1].color;
+                        _levelColors[1].pixelsCounter += _pixelsCounter;
+                        _levelColors[1].percent = (_levelColors[1].pixelsCounter / _pixelsCount) * 100f;
+                    }
                     if (Input.GetKey(KeyCode.L))
-                        currentColor = _levelColors[2];
+                    {
+                        currentColor = _levelColors[2].color;
+                        _levelColors[2].pixelsCounter += _pixelsCounter;
+                        _levelColors[2].percent = (_levelColors[2].pixelsCounter / _pixelsCount) * 100f;
+                    }
 
-
-                    _progessCounter += _pixelsCounter ;
 
                     for (int i = 0; i < _pixelsCounter; i++)
                     {
@@ -114,9 +150,10 @@ public class DeleteMeGameManager : MonoBehaviour
 
                     A.SetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep, pixA);
                     A.Apply();
-                    yield return new WaitForSeconds(_knittingDelay);
+                    yield return new WaitForFixedUpdate();
+
                     widthIterator += _knittingStep;
-                    _levelProgress.value = _progessCounter / (texHeight * texWidth * 1.0f);
+                    _levelProgress.value = _progessCounter / _pixelsCount;
                 }
                 else
                 {
@@ -161,6 +198,5 @@ public class DeleteMeGameManager : MonoBehaviour
         }
         _myTex.Apply();
     }
-
     #endregion
 }

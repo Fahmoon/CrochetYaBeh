@@ -76,14 +76,14 @@ public class Rope : MonoBehaviour
             Vector3 changeAmount = changeDir * error;
             if (i != 0)
             {
-                firstSeg.currentPos -= changeAmount * 0.5f;
+                firstSeg.currentPos =Vector3.MoveTowards(firstSeg.currentPos,firstSeg.currentPos- changeAmount * 0.5f,0.5f);
                 ropeSegments[i] = firstSeg;
-                secondSeg.currentPos += changeAmount * 0.5f;
+                secondSeg.currentPos = Vector3.MoveTowards(secondSeg.currentPos, secondSeg.currentPos + changeAmount * 0.5f, 0.5f);
                 ropeSegments[i + 1] = secondSeg;
             }
             else
             {
-                secondSeg.currentPos += changeAmount;
+                secondSeg.currentPos = Vector3.MoveTowards(secondSeg.currentPos, secondSeg.currentPos + changeAmount, 1);
                 ropeSegments[i + 1] = secondSeg;
             }
         }
