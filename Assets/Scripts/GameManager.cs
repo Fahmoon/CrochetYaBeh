@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+[System.Serializable]
 public class StateChanged : UnityEvent<GameStates> { }
 public class GameManager : MonoBehaviour
 {

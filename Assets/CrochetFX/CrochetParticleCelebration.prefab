@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3348923572998268974
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6940938354008249121}
+  m_Layer: 0
+  m_Name: CrochetParticleCelebration
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6940938354008249121
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3348923572998268974}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7377144, y: 7.0933547, z: -2.5995412}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8894526154840819727}
+  - {fileID: 8121077714669305316}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &8123903285260913394
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6940938354008249121}
+    m_Modifications:
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.05228561
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2766452
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.260459
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.53231543
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.25323644
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.029408475
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.80724645
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -57.621002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -55.279003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 36.307003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357480617920050, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_Name
+      value: ConfettiFountainRomantic (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 198979345862707656, guid: e6bb5f73be676bd4281c445876044bfc,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+--- !u!4 &8121077714669305316 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8123903285260913394}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8890545126474661657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 6940938354008249121}
+    m_Modifications:
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.8277144
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.2766452
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.260459
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.31781492
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.45864582
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.4280399
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7109287
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -57.621002
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 45.210003
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 36.307003
+      objectReference: {fileID: 0}
+    - target: {fileID: 1357480617920050, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+      propertyPath: m_Name
+      value: ConfettiFountainRomantic
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e6bb5f73be676bd4281c445876044bfc, type: 3}
+--- !u!4 &8894526154840819727 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4006455479858966, guid: e6bb5f73be676bd4281c445876044bfc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8890545126474661657}
+  m_PrefabAsset: {fileID: 0}
