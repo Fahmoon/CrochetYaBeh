@@ -48,7 +48,7 @@ public class GetShapePointsSpline : MonoBehaviour
     public List<Vector3> verticies = new List<Vector3>();
     int currentVertex;
     int i;
-    DeleteMeGameManager deleteMeGame;
+    LevelHandler deleteMeGame;
     public PathCreation.EndOfPathInstruction endOfPathInstruction;
     float radiusModifier;
     public float radiusModifierFactor;
@@ -59,7 +59,7 @@ public class GetShapePointsSpline : MonoBehaviour
 
     void Start()
     {
-        deleteMeGame = GetComponentInParent<DeleteMeGameManager>();
+        deleteMeGame = GetComponentInParent<LevelHandler>();
         //myMesh = GetComponent<MeshFilter>();
         myMesh.GetVertices(verticies);
         currentVertex = 0;
