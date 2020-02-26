@@ -12,11 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535b982f611d240d1b2955240e57be93, type: 3}
   m_Name: Progression
   m_EditorClassIdentifier: 
-  _progress: 0
-  _starsCount: 0
+  _progress: 1
+  _starsCount: 1
   _currentColor:
-    color: {r: 0, g: 0, b: 0, a: 0}
+    color: {r: 0.46666667, g: 0.8235294, b: 0.08627451, a: 1}
     percent: 0
     pixelsCounter: 0
+    compared: 0
   _isPainting: 0
-  _colorAndPercents: []
+  _colorAndPercents:
+  - color: {r: 0.8392157, g: 0.83137256, b: 0.07058824, a: 1}
+    percent: 16.210938
+    pixelsCounter: 42496
+    compared: 0
+  - color: {r: 0.46666667, g: 0.8235294, b: 0.08627451, a: 1}
+    percent: 34.570312
+    pixelsCounter: 90624
+    compared: 0
+  - color: {r: 0.8039216, g: 0.16078432, b: 0.14901961, a: 1}
+    percent: 49.21875
+    pixelsCounter: 129024
+    compared: 1

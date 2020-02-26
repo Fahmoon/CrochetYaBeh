@@ -22,37 +22,40 @@ public class ColorAndPercent
 }
 public class LevelHandler : MonoBehaviour
 {
-    Vector3[] points;
-    public static Vector3 currentPos;
+    #region Static Public Fields
+    public static Vector3           CURRENT_PIXEL_POSITION;
+    #endregion
     #region Private Fields
     [Header("LEVEL CONSTs")]
     [SerializeField, Range(1, 100)]
-    private int _knittingStep;
+    private int                     _knittingStep;
     [SerializeField]
-    private List<Image> _levelButtons;
+    private List<Image>             _levelButtons;
     [SerializeField]
-    private LevelProgression _levelProgression;
+    private LevelProgression        _levelProgression;
     [SerializeField]
-    private LevelReference _levelReference;
+    private LevelReference          _levelReference;
     [SerializeField]
-    LineRenderer myLine;
+    private LineRenderer            _myLine;
     [SerializeField]
-    SpriteRenderer myYarnBall;
+    private SpriteRenderer          _myYarnBall;
     [Space]
     [Header("MODEL VARs")]
     [SerializeField]
-    private GameObject _model;
+    private GameObject              _model;
     [SerializeField]
-    private MeshFilter _modelMeshFilter;
+    private MeshFilter              _modelMeshFilter;
     [SerializeField]
-    private Texture2D _modelTex;
+    private Texture2D               _modelTex;
     [SerializeField]
-    private Material _material;
-    private List<ColorAndPercent> _levelColors = new List<ColorAndPercent>();
-    private Texture2D _myTex;
-    private int _progessCounter;
-    private float _pixelsCount;
-    private ColorAndPercent _currentColor;
+    private Material                _material;
+
+    private Vector3[]               _points;
+    private List<ColorAndPercent>   _levelColors = new List<ColorAndPercent>();
+    private Texture2D               _myTex;
+    private int                     _progessCounter;
+    private float                   _pixelsCount;
+    private ColorAndPercent         _currentColor;
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
@@ -73,10 +76,10 @@ public class LevelHandler : MonoBehaviour
             _levelColors.Add(new ColorAndPercent(item));
 
         _levelProgression.ColorAndPercents.Clear();
-        _levelProgression.StarsCount = 0;
+        _levelProgression.StarsCount = -1;
         _levelProgression.Progress = 0;
 
-        OnColorChanging(_levelReference.RefColorsWithPercents[0]);
+        OnColorChanging(new ColorAndPercent(_levelReference.RefColorsWithPercents[0]));
 
         if (_levelColors.Count != _levelButtons.Count)
         {
@@ -96,10 +99,12 @@ public class LevelHandler : MonoBehaviour
         int counter = _levelColors.Count;
         for (int i = 0; i < counter; i++)
         {
-            if (_levelButtons[i].gameObject.GetComponent<AssociatedColor>() == null)
+            AssociatedColor associated = _levelButtons[i].gameObject.GetComponent<AssociatedColor>();
+
+            if (associated == null)
                 _levelButtons[i].gameObject.AddComponent<AssociatedColor>().Color = _levelColors[i].color;
             else
-                _levelButtons[i].gameObject.GetComponent<AssociatedColor>().Color = _levelColors[i].color;
+                associated.Color = _levelColors[i].color;
         }
 
         _myTex = TransferAlpha(_modelTex);
@@ -110,9 +115,9 @@ public class LevelHandler : MonoBehaviour
     private void OnColorChanging(ColorAndPercent color)
     {
         _currentColor = color;
-        myLine.startColor = color.color;
-        myLine.endColor = color.color;
-        myYarnBall.color = color.color;
+        _myLine.startColor = color.color;
+        _myLine.endColor = color.color;
+        _myYarnBall.color = color.color;
     }
     private void GetAllTextures(GameObject obj)
     {
@@ -129,64 +134,7 @@ public class LevelHandler : MonoBehaviour
                 allTexture.Add(texture);
             }
         }
-
         Debug.Log("All Textures Count: " + allTexture.Count);
-    }
-    private IEnumerator ChangeMyAlpha(Texture2D A, float alpha)
-    {
-        Color[] pixA;
-        float texWidth = A.width,
-              texHeight = A.height,
-              heightIterator = 0,
-              widthIterator;
-        int _pixelsCounter = _knittingStep * _knittingStep;
-        _pixelsCount = texHeight * texWidth;
-
-        if ((int)texWidth != (int)texHeight || (int)texWidth % _knittingStep != 0)
-            yield return null;
-
-        while (heightIterator < texHeight)
-        {
-            widthIterator = 0;
-            pixA = null;
-            while (widthIterator < texWidth)
-            {
-                if (_levelProgression.IsPainting)
-                {
-                    pixA = _modelTex.GetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep);
-
-                    _progessCounter += _pixelsCounter;
-
-                    _currentColor.pixelsCounter += _pixelsCounter;
-                    _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
-                    points = _modelMeshFilter.mesh.GetMappedPoints(new Vector2(widthIterator / _myTex.width, heightIterator / _myTex.height));
-                    if (points.Length > 0)
-                    {
-                        currentPos = points[0];
-                    }
-                    for (int i = 0; i < _pixelsCounter; i++)
-                    {
-                        pixA[i].r *= _currentColor.color.r;
-                        pixA[i].g *= _currentColor.color.g;
-                        pixA[i].b *= _currentColor.color.b;
-                        pixA[i].a = Mathf.Clamp01(alpha);
-                    }
-
-                    A.SetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep, pixA);
-                    A.Apply();
-                    yield return new WaitForFixedUpdate();
-                    UpdateStars();
-                    widthIterator += _knittingStep;
-                    _levelProgression.Progress = _progessCounter / _pixelsCount;
-                }
-                else
-                {
-                    yield return new WaitForFixedUpdate();
-                    yield return null;
-                }
-            }
-            heightIterator += _knittingStep;
-        }
     }
     private void UpdateStars()
     {
@@ -229,6 +177,61 @@ public class LevelHandler : MonoBehaviour
         }
         B.Apply();
         return B;
+    }
+    #endregion
+    #region Coroutines
+    private IEnumerator ChangeMyAlpha(Texture2D A, float alpha)
+    {
+        Color[] pixA;
+        float texWidth = A.width, texHeight = A.height,heightIterator = 0, widthIterator;
+        int _pixelsBatch = _knittingStep * _knittingStep;
+        _pixelsCount = texHeight * texWidth;
+
+        if ((int)texWidth != (int)texHeight || (int)texWidth % _knittingStep != 0)
+            yield return null;
+
+        while (heightIterator < texHeight)
+        {
+            widthIterator = 0;
+            pixA = null;
+            while (widthIterator < texWidth)
+            {
+                if (_levelProgression.IsPainting)
+                {
+                    pixA = _modelTex.GetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep);
+
+                    _progessCounter += _pixelsBatch;
+
+                    _currentColor.pixelsCounter += _pixelsBatch;
+                    _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
+                    _points = _modelMeshFilter.mesh.GetMappedPoints(new Vector2(widthIterator / _myTex.width, heightIterator / _myTex.height));
+                    if (_points.Length > 0)
+                    {
+                        CURRENT_PIXEL_POSITION = _points[0];
+                    }
+                    for (int i = 0; i < _pixelsBatch; i++)
+                    {
+                        pixA[i].r *= _currentColor.color.r;
+                        pixA[i].g *= _currentColor.color.g;
+                        pixA[i].b *= _currentColor.color.b;
+                        pixA[i].a = Mathf.Clamp01(alpha);
+                    }
+
+                    A.SetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep, pixA);
+                    A.Apply();
+                    yield return new WaitForFixedUpdate();
+                    UpdateStars();
+                    widthIterator += _knittingStep;
+                    _levelProgression.Progress = _progessCounter / _pixelsCount;
+                }
+                else
+                {
+                    yield return new WaitForFixedUpdate();
+                    yield return null;
+                }
+            }
+            heightIterator += _knittingStep;
+        }
     }
     #endregion
 }
