@@ -125,23 +125,7 @@ public class LevelHandler : MonoBehaviour
         _myLine.endColor = color.color;
         _myYarnBall.color = color.color;
     }
-    private void GetAllTextures(GameObject obj)
-    {
-        List<Texture> allTexture = new List<Texture>();
-
-        Material sharedMaterial = obj.GetComponent<Renderer>().sharedMaterial;
-        Shader shader = sharedMaterial.shader;
-
-        for (int i = 0; i < ShaderUtil.GetPropertyCount(shader); i++)
-        {
-            if (ShaderUtil.GetPropertyType(shader, i) == ShaderUtil.ShaderPropertyType.TexEnv)
-            {
-                Texture texture = sharedMaterial.GetTexture(ShaderUtil.GetPropertyName(shader, i));
-                allTexture.Add(texture);
-            }
-        }
-        Debug.Log("All Textures Count: " + allTexture.Count);
-    }
+  
     private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
     {
         List<Vector3> worldPoints = new List<Vector3>();
