@@ -16,7 +16,7 @@ MonoBehaviour:
   _colorAndPercents:
   - color: {r: 0.8392157, g: 0.83137256, b: 0.07058824, a: 1}
     percent: 40
-    pixelsCounter: 0
+    pixelsCounter: 211200
     compared: 0
   - color: {r: 0.46666667, g: 0.8235294, b: 0.08627451, a: 1}
     percent: 40

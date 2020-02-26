@@ -61,7 +61,6 @@ public class GetShapePointsSpline : MonoBehaviour
     void Start()
     {
         deleteMeGame = GetComponentInParent<LevelHandler>();
-        //myMesh = GetComponent<MeshFilter>();
         myMesh.GetVertices(verticies);
         currentVertex = 0;
         ComparePositions sc = new ComparePositions();
@@ -86,17 +85,14 @@ public class GetShapePointsSpline : MonoBehaviour
         Color[] myColor = { Color.red, Color.yellow, Color.blue };
         GameObject temp = GameObject.CreatePrimitive(PrimitiveType.Sphere);
         if (i < verticies.Count)
-        {
-            temp.transform.position = verticies[i];
-            //            Debug.Log(verticies[i].x);
-        }
-
+			temp.transform.position = verticies[i];
 
         temp.transform.localScale = Vector3.one * 0.003f;
         yield return new WaitForSeconds(0.05f);
         i++;
         StartCoroutine(draw());
     }
+
     bool knitting;
     private void Update()
     {
@@ -109,7 +105,6 @@ public class GetShapePointsSpline : MonoBehaviour
             knitting = false;
         }
     }
-    // Update is called once per frame
     IEnumerator SmoothScale()
     {
         float t = 0f;
@@ -133,12 +128,12 @@ public class GetShapePointsSpline : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (LevelHandler.currentPos!=Vector3.zero)
+        if (LevelHandler.CURRENT_PIXEL_POSITION!=Vector3.zero)
         {
 
             //distanceTravelled += Mathf.Clamp(speed - radiusModifierFactor/(Vector3.Distance(Vector3.zero, new Vector3(anchor.position.x, 0, anchor.position.z))+0.000001f) , 0, 100000);
             //anchor.position = ourCreator.path.GetPointAtDistance(distanceTravelled, endOfPathInstruction);
-            anchor.position = LevelHandler.currentPos;
+            anchor.position = LevelHandler.CURRENT_PIXEL_POSITION;
         }
     }
 }

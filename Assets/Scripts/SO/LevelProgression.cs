@@ -31,8 +31,13 @@ public class LevelProgression : ScriptableObject
         get => _starsCount;
         set
         {
-            if (value == _starsCount) return;
-
+            if (value == _starsCount)
+                return;
+            if (value == -1)
+            {
+                _starsCount = -1;
+                return;
+            }
             _starsCount = Mathf.Clamp(value,0,3);
             Stars_Changed(_starsCount);
         }
