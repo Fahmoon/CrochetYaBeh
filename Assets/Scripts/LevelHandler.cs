@@ -50,12 +50,14 @@ public class LevelHandler : MonoBehaviour
     [SerializeField]
     private Material                _material;
 
-    private Vector3[]               _points;
     private List<ColorAndPercent>   _levelColors = new List<ColorAndPercent>();
+    private List<Vector3>           _modelMappedPoints = new List<Vector3>();
     private Texture2D               _myTex;
     private int                     _progessCounter;
     private float                   _pixelsCount;
     private ColorAndPercent         _currentColor;
+    private List<Vector3>           _mappedPoints = new List<Vector3>();
+    private int                     _mappedPointsCounter, _mappedPointsMax;
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
@@ -108,6 +110,10 @@ public class LevelHandler : MonoBehaviour
         }
 
         _myTex = TransferAlpha(_modelTex);
+        _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter, _myTex, _knittingStep);
+        if (_mappedPoints == null) return;
+        _mappedPointsMax = _mappedPoints.Count;
+        _mappedPointsCounter = 0;
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
         _levelProgression.Color_Changed += OnColorChanging;
@@ -135,6 +141,34 @@ public class LevelHandler : MonoBehaviour
             }
         }
         Debug.Log("All Textures Count: " + allTexture.Count);
+    }
+    private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
+    {
+        List<Vector3> worldPoints = new List<Vector3>();
+        Vector3 lastPos = new Vector3(0f,0f,0f);
+
+        int textureWidth = texture2D.width,
+            textureHeight = texture2D.height;
+
+        if (textureHeight != textureWidth)
+            return null;
+
+        for (int i = 0; i < textureWidth; i += knittingSpeed)
+        {
+            for (int j = 0; j < textureHeight; j += knittingSpeed)
+            {
+                Vector3[] points = modelMesh.mesh.GetMappedPoints(new Vector2(j * 1.0f / textureWidth, i * 1.0f / textureHeight));
+
+                if (points.Length <= 0)
+                    worldPoints.Add(lastPos);
+                else
+                {
+                    worldPoints.Add(points[0]);
+                    lastPos = points[0];
+                }
+            }
+        }
+        return worldPoints;
     }
     private void UpdateStars()
     {
@@ -167,9 +201,10 @@ public class LevelHandler : MonoBehaviour
             B = new Texture2D(A.width, A.height, TextureFormat.ARGB32, false);
 
         Color pixA;
-        for (int i = 0; i < A.width; i++)
+        int aWidth = A.width, aHeight = A.height;
+        for (int i = 0; i < aWidth; i++)
         {
-            for (int j = 0; j < A.height; j++)
+            for (int j = 0; j < aHeight; j++)
             {
                 pixA = A.GetPixel(i, j);
                 B.SetPixel(i, j, pixA);
@@ -204,11 +239,10 @@ public class LevelHandler : MonoBehaviour
 
                     _currentColor.pixelsCounter += _pixelsBatch;
                     _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
-                    _points = _modelMeshFilter.mesh.GetMappedPoints(new Vector2(widthIterator / _myTex.width, heightIterator / _myTex.height));
-                    if (_points.Length > 0)
-                    {
-                        CURRENT_PIXEL_POSITION = _points[0];
-                    }
+
+                    CURRENT_PIXEL_POSITION = _mappedPoints[_mappedPointsCounter];
+                    
+
                     for (int i = 0; i < _pixelsBatch; i++)
                     {
                         pixA[i].r *= _currentColor.color.r;
@@ -222,6 +256,8 @@ public class LevelHandler : MonoBehaviour
                     yield return new WaitForFixedUpdate();
                     UpdateStars();
                     widthIterator += _knittingStep;
+                    if(_mappedPointsCounter<_mappedPointsMax)
+                        _mappedPointsCounter++;
                     _levelProgression.Progress = _progessCounter / _pixelsCount;
                 }
                 else
