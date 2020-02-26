@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:7e52898e2701ca0206a2f89bd9f98901:2e26004467aec403f4d076eeeb28dbfa:45898c7b4559d825aca92d52a93906cd$
+# $TexturePacker:SmartUpdate:43c6f70b2240d79113b69016199e4d33:7492be4730e5f4457ee8525d328c8615:45898c7b4559d825aca92d52a93906cd$
 #
 :format=40300
 :texture=knit.png
@@ -13,18 +13,15 @@
 :borders=disabled
 :alphahandling=ClearTransparentPixels
 
-button;1168;1549;297;316; 0.5;0.5; 0;0;0;0
-color;2;1598;267;267; 0.5;0.5; 0;0;0;0
-done;2;1286;481;244; 0.5;0.5; 0;0;0;0
-green;271;1553;297;312; 0.5;0.5; 0;0;0;0
-loading;576;1976;471;70; 0.5;0.5; 0;0;0;0
-logo;485;991;915;539; 0.5;0.5; 0;0;0;0
-match it;1467;1532;311;333; 0.5;0.5; 0;0;0;0
-progress;1049;1976;471;70; 0.5;0.5; 0;0;0;0
-red;570;1553;297;312; 0.5;0.5; 0;0;0;0
+button;475;1461;297;316; 0.5;0.5; 0;0;0;0
+color;876;1779;267;267; 0.5;0.5; 0;0;0;0
+done;1087;1533;481;244; 0.5;0.5; 0;0;0;0
+loading;1145;1976;471;70; 0.5;0.5; 0;0;0;0
+logo;2;903;915;539; 0.5;0.5; 0;0;0;0
+match it;774;1444;311;333; 0.5;0.5; 0;0;0;0
+progress;2;1707;471;70; 0.5;0.5; 0;0;0;0
 replay;214;1867;179;179; 0.5;0.5; 0;0;0;0
 settings;395;1867;179;179; 0.5;0.5; 0;0;0;0
-shadow;1522;1892;298;154; 0.5;0.5; 0;0;0;0
+shadow;576;1892;298;154; 0.5;0.5; 0;0;0;0
 star;2;1946;104;100; 0.5;0.5; 0;0;0;0
 star_holder;108;1946;104;100; 0.5;0.5; 0;0;0;0
-yellow;869;1553;297;312; 0.5;0.5; 0;0;0;0

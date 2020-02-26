@@ -59,26 +59,24 @@ public class LevelHandler : MonoBehaviour
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
-    private void Start()
-    {
-        Init();
-    }
+
     private void OnDestroy()
     {
         _levelProgression.Color_Changed -= OnColorChanging;
     }
     #endregion
 
-    #region Private Methods
-    private void Init()
+    #region Public Methods
+    public void ListenToReference(LevelReference currentLevelReference)
     {
+        _levelProgression.Color_Changed += OnColorChanging;
         foreach (var item in _levelReference.RefColorsWithPercents)
             _levelColors.Add(new ColorAndPercent(item));
 
         _levelProgression.ColorAndPercents.Clear();
         _levelProgression.StarsCount = -1;
         _levelProgression.Progress = 0;
-
+        _levelProgression.IsPainting = false;
         OnColorChanging(new ColorAndPercent(_levelReference.RefColorsWithPercents[0]));
 
         if (_levelColors.Count != _levelButtons.Count)
@@ -110,8 +108,10 @@ public class LevelHandler : MonoBehaviour
         _myTex = TransferAlpha(_modelTex);
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
-        _levelProgression.Color_Changed += OnColorChanging;
     }
+    #endregion
+    #region Private Methods
+
     private void OnColorChanging(ColorAndPercent color)
     {
         _currentColor = color;
