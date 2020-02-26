@@ -5,23 +5,29 @@ using UnityEngine.UI;
 public class UIHandler : MonoBehaviour
 {
     #region Private Fields
-    [SerializeField] private LevelProgression levelProgressionSO;
     private int _filledStarsCount;
     #endregion
     #region Public Fields
+    public Image referenceImage;
     public Image[] filledStars;
     public GameObject doneButton;
     public GameObject[] colorButtons;
     public Image progressBar;
+    [SerializeField] GameObject gameplayUI;
     #endregion
     #region MonoBehavior Callbacks
     private void Start()
     {
-        levelProgressionSO.Stars_Changed += StarsChanged;
+        GameManager.Instance.levelProgressionSO.Stars_Changed += StarsChanged;
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.levelProgressionSO.Stars_Changed -= StarsChanged;
     }
     private void Update()
     {
-        progressBar.fillAmount = levelProgressionSO.Progress;
+        if (GameManager.Instance.levelProgressionSO.IsPainting)
+            progressBar.fillAmount = GameManager.Instance.levelProgressionSO.Progress;
     }
     #endregion
     #region Private Methods
@@ -33,19 +39,24 @@ public class UIHandler : MonoBehaviour
         for (int i = 0; i <= stars; i++)
             filledStars[i].enabled = true;
     }
-    private void AddStar()
-    {
-        filledStars[_filledStarsCount].enabled = true;
-        _filledStarsCount++;
-    }
+
     #endregion
     #region Public Methods
-    public void ActivateDoneButton()
+    public void ListenToCurrentReference(LevelReference currentReference)
     {
-        for (int i = 0; i < colorButtons.Length; i++)
+        referenceImage.sprite = currentReference.RefSprite;
+    }
+    public void GameOverRoutineUI()
+    {
+        for (int i = 0; i < gameplayUI.transform.childCount; i++)
         {
-            colorButtons[i].SetActive(false);
+            gameplayUI.transform.GetChild(i).gameObject.SetActive(false);
         }
+    }
+    public void EnableGameOverPanel()
+    { }
+    public void EnableDoneButton()
+    {
         doneButton.SetActive(true);
     }
     #endregion

@@ -38,21 +38,21 @@ public class ComparePositions : IComparer<Vector3>
 public class GetShapePointsSpline : MonoBehaviour
 {
     public LevelProgression myScriptableObject;
-    public Mesh myMesh;
-    public PathCreation.PathCreator ourCreator;
+    // public Mesh myMesh;
+    //  public PathCreation.PathCreator ourCreator;
     public static GetShapePointsSpline instance;
-    public float speed;
-    public int vertexSpeed;
-    public float accuracy;
+    //  public float speed;
+    // public int vertexSpeed;
+    //  public float accuracy;
     public Transform anchor;
-    float distanceTravelled;
-    public List<Vector3> verticies = new List<Vector3>();
-    int currentVertex;
-    int i;
+    // float distanceTravelled;
+    // public List<Vector3> verticies = new List<Vector3>();
+    // int currentVertex;
+    // int i;
     LevelHandler deleteMeGame;
-    public PathCreation.EndOfPathInstruction endOfPathInstruction;
-    float radiusModifier;
-    public float radiusModifierFactor;
+    //  public PathCreation.EndOfPathInstruction endOfPathInstruction;
+    //  float radiusModifier;
+    //  public float radiusModifierFactor;
     private void Awake()
     {
         instance = this;
@@ -61,38 +61,41 @@ public class GetShapePointsSpline : MonoBehaviour
     void Start()
     {
         deleteMeGame = GetComponentInParent<LevelHandler>();
-        myMesh.GetVertices(verticies);
-        currentVertex = 0;
-        ComparePositions sc = new ComparePositions();
-        verticies.Sort(sc);
-        anchor.position = verticies[0] + transform.position;
-        ourCreator.bezierPath.SetPoint(0, verticies[0] + transform.position, true);
-        ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[1] + transform.position, true);
-        ourCreator.bezierPath.IsClosed = true;
-        ourCreator.bezierPath.IsClosed = false;
-        for (int i = 2; i < verticies.Count; i++)
-        {
+        //myMesh = GetComponent<MeshFilter>();
+        // myMesh.GetVertices(verticies);
+        // currentVertex = 0;
+        //  ComparePositions sc = new ComparePositions();
+        //  verticies.Sort(sc);
+        // anchor.position = verticies[0] + transform.position;
+        //ourCreator.bezierPath.SetPoint(0, verticies[0] + transform.position, true);
+        //ourCreator.bezierPath.SetPoint(ourCreator.bezierPath.NumPoints - 1, verticies[1] + transform.position, true);
+        //ourCreator.bezierPath.IsClosed = true;
+        //ourCreator.bezierPath.IsClosed = false;
+        //for (int i = 2; i < verticies.Count; i++)
+        //{
 
-            ourCreator.bezierPath.AddSegmentToEnd(verticies[i] + transform.position);
+        //    ourCreator.bezierPath.AddSegmentToEnd(verticies[i] + transform.position);
 
-        }
-  
-   //     StartCoroutine(draw());
+        //}
+
+        //     StartCoroutine(draw());
     }
 
-    IEnumerator draw()
-    {
-        Color[] myColor = { Color.red, Color.yellow, Color.blue };
-        GameObject temp = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        if (i < verticies.Count)
-			temp.transform.position = verticies[i];
+    //IEnumerator draw()
+    //{
+    //    Color[] myColor = { Color.red, Color.yellow, Color.blue };
+    //    GameObject temp = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+    //    if (i < verticies.Count)
+    //    {
+    //        temp.transform.position = verticies[i];
+    //    }
 
-        temp.transform.localScale = Vector3.one * 0.003f;
-        yield return new WaitForSeconds(0.05f);
-        i++;
-        StartCoroutine(draw());
-    }
 
+    //    temp.transform.localScale = Vector3.one * 0.003f;
+    //    yield return new WaitForSeconds(0.05f);
+    //    i++;
+    //    StartCoroutine(draw());
+    //}
     bool knitting;
     private void Update()
     {
@@ -105,30 +108,31 @@ public class GetShapePointsSpline : MonoBehaviour
             knitting = false;
         }
     }
-    IEnumerator SmoothScale()
-    {
-        float t = 0f;
-        while (t <= 1.0)
-        {
-            if (knitting)
-            {
-                if (anchor.position != verticies[currentVertex] + transform.position)
-                {
-                    t += Time.fixedDeltaTime / speed;
-                    anchor.position = Vector3.Lerp(anchor.position, verticies[currentVertex] + transform.position, Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, t))));
-                }
-                else
-                {
-                    currentVertex++;
-                    t = 0;
-                }
-            }
-            yield return null;
-        }
-    }
+    // Update is called once per frame
+    //IEnumerator SmoothScale()
+    //{
+    //    float t = 0f;
+    //    while (t <= 1.0)
+    //    {
+    //        if (knitting)
+    //        {
+    //            if (anchor.position != verticies[currentVertex] + transform.position)
+    //            {
+    //                t += Time.fixedDeltaTime / speed;
+    //                anchor.position = Vector3.Lerp(anchor.position, verticies[currentVertex] + transform.position, Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, Mathf.SmoothStep(0f, 1f, t))));
+    //            }
+    //            else
+    //            {
+    //                currentVertex++;
+    //                t = 0;
+    //            }
+    //        }
+    //        yield return null;
+    //    }
+    //}
     void FixedUpdate()
     {
-        if (LevelHandler.CURRENT_PIXEL_POSITION!=Vector3.zero)
+        if (LevelHandler.CURRENT_PIXEL_POSITION != Vector3.zero)
         {
 
             //distanceTravelled += Mathf.Clamp(speed - radiusModifierFactor/(Vector3.Distance(Vector3.zero, new Vector3(anchor.position.x, 0, anchor.position.z))+0.000001f) , 0, 100000);

@@ -56,31 +56,29 @@ public class LevelHandler : MonoBehaviour
     private int                     _progessCounter;
     private float                   _pixelsCount;
     private ColorAndPercent         _currentColor;
-    private List<Vector3>           _mappedPoints = new List<Vector3>();
+    [SerializeField] private List<Vector3>           _mappedPoints = new List<Vector3>();
     private int                     _mappedPointsCounter, _mappedPointsMax;
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
-    private void Start()
-    {
-        Init();
-    }
+
     private void OnDestroy()
     {
         _levelProgression.Color_Changed -= OnColorChanging;
     }
     #endregion
 
-    #region Private Methods
-    private void Init()
+    #region Public Methods
+    public void ListenToReference(LevelReference currentLevelReference)
     {
+        _levelProgression.Color_Changed += OnColorChanging;
         foreach (var item in _levelReference.RefColorsWithPercents)
             _levelColors.Add(new ColorAndPercent(item));
 
         _levelProgression.ColorAndPercents.Clear();
         _levelProgression.StarsCount = -1;
         _levelProgression.Progress = 0;
-
+        _levelProgression.IsPainting = false;
         OnColorChanging(new ColorAndPercent(_levelReference.RefColorsWithPercents[0]));
 
         if (_levelColors.Count != _levelButtons.Count)
@@ -116,8 +114,10 @@ public class LevelHandler : MonoBehaviour
         _mappedPointsCounter = 0;
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
-        _levelProgression.Color_Changed += OnColorChanging;
     }
+    #endregion
+    #region Private Methods
+
     private void OnColorChanging(ColorAndPercent color)
     {
         _currentColor = color;
@@ -168,6 +168,7 @@ public class LevelHandler : MonoBehaviour
                 }
             }
         }
+        worldPoints.RemoveAt(0);
         return worldPoints;
     }
     private void UpdateStars()
@@ -256,7 +257,7 @@ public class LevelHandler : MonoBehaviour
                     yield return new WaitForFixedUpdate();
                     UpdateStars();
                     widthIterator += _knittingStep;
-                    if(_mappedPointsCounter<_mappedPointsMax)
+                    if(_mappedPointsCounter<_mappedPointsMax-1)
                         _mappedPointsCounter++;
                     _levelProgression.Progress = _progessCounter / _pixelsCount;
                 }
