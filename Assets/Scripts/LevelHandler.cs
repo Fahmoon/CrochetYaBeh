@@ -56,7 +56,7 @@ public class LevelHandler : MonoBehaviour
     private int                     _progessCounter;
     private float                   _pixelsCount;
     private ColorAndPercent         _currentColor;
-    private List<Vector3>           _mappedPoints = new List<Vector3>();
+    [SerializeField] private List<Vector3>           _mappedPoints = new List<Vector3>();
     private int                     _mappedPointsCounter, _mappedPointsMax;
     //private bool                    _gotProgressStar;
     #endregion
@@ -168,6 +168,7 @@ public class LevelHandler : MonoBehaviour
                 }
             }
         }
+        worldPoints.RemoveAt(0);
         return worldPoints;
     }
     private void UpdateStars()
@@ -256,7 +257,7 @@ public class LevelHandler : MonoBehaviour
                     yield return new WaitForFixedUpdate();
                     UpdateStars();
                     widthIterator += _knittingStep;
-                    if(_mappedPointsCounter<_mappedPointsMax)
+                    if(_mappedPointsCounter<_mappedPointsMax-1)
                         _mappedPointsCounter++;
                     _levelProgression.Progress = _progessCounter / _pixelsCount;
                 }

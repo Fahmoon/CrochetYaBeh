@@ -1416,6 +1416,7 @@ MonoBehaviour:
   _modelMeshFilter: {fileID: 2009451330}
   _modelTex: {fileID: 2800000, guid: 0bb140144fdd845519341337b019c4d7, type: 3}
   _material: {fileID: 2100000, guid: 2975b46f5cb3a47b8a0f40107ea39eff, type: 2}
+  _mappedPoints: []
 --- !u!1 &1813211294
 GameObject:
   m_ObjectHideFlags: 0
@@ -1993,6 +1994,51 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -424.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 703.8461
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 414.6154
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471929930572689775, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4941420041495420480, guid: 955e244e9cb4749e5b0afec5a33ddba1,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3747125865782905798, guid: 955e244e9cb4749e5b0afec5a33ddba1,
         type: 3}

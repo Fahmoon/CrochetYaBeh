@@ -53,6 +53,8 @@ public class UIHandler : MonoBehaviour
             gameplayUI.transform.GetChild(i).gameObject.SetActive(false);
         }
     }
+    public void EnableGameOverPanel()
+    { }
     public void EnableDoneButton()
     {
         doneButton.SetActive(true);
