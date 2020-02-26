@@ -14,6 +14,7 @@ public class UIHandler : MonoBehaviour
     public GameObject[] colorButtons;
     public Image progressBar;
     [SerializeField] GameObject gameplayUI;
+    [SerializeField] GameObject gameOverUI;
     #endregion
     #region MonoBehavior Callbacks
     private void Start()
@@ -54,7 +55,9 @@ public class UIHandler : MonoBehaviour
         }
     }
     public void EnableGameOverPanel()
-    { }
+    {
+        gameOverUI.SetActive(true);
+    }
     public void EnableDoneButton()
     {
         doneButton.SetActive(true);
