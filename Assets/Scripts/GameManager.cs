@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameStates currentState;
     public ReferenceUpdated referenceUpdated = new ReferenceUpdated();
     [SerializeField] GameObject yarnBall;
+    [SerializeField] GameObject needle;
     [SerializeField] GameObject myRope;
     [SerializeField] GameObject myKnittedObject;
     [SerializeField] ParticleSystem winConfetti;
@@ -66,6 +67,7 @@ public class GameManager : MonoBehaviour
     {
         yarnBall.SetActive(false);
         myRope.SetActive(false);
+        needle.SetActive(false);
         ////
         float timeStamp = Time.time;
         float totalRotateDuration = 4;
@@ -101,7 +103,7 @@ public class GameManager : MonoBehaviour
         myKnittedObject.transform.localPosition = Vector3.up * 0.05f;
         myKnittedObject.transform.localScale = Vector3.one * 2;
         characterAnimator.gameObject.SetActive(true);
-        yield return new WaitForSeconds(6);
+        yield return new WaitForSeconds(4);
         uIHandler.EnableGameOverPanel();
     }
 }

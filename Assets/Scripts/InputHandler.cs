@@ -8,6 +8,8 @@ public class InputHandler : MonoBehaviour
     #region Public Methods
     public void ChangeColor(AssociatedColor associated)
     {
+        if (Input.touchCount > 1)
+            return;
         _levelProgression.CurrentColor = associated.Color;
         _levelProgression.IsPainting = true;
     }

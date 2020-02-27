@@ -6,6 +6,7 @@ public class LevelReference : ScriptableObject
 {
     #region Private Fields
     [SerializeField] private Sprite                _sprite;
+    [SerializeField] private Mesh                  _mesh;
     [SerializeField] private List<ColorAndPercent> _colorAndPercents;
     [SerializeField, Range(0,100)] private float   _clearnce = 5f;
     #endregion
@@ -18,6 +19,7 @@ public class LevelReference : ScriptableObject
     {
         get => _colorAndPercents;
     }
+    public Mesh Mesh { get => _mesh;  }
     #endregion
     #region Public Methods
     public int MatchingReferenceColors(List<ColorAndPercent> colorAndPercents)

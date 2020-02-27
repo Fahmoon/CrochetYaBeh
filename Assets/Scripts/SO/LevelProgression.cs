@@ -52,8 +52,6 @@ public class LevelProgression : ScriptableObject
         get => _currentColor.color;
         set
         {
-            if (value == _currentColor.color) return;
-
             _currentColor.color = value;
             Color_Changed(_colorAndPercents.Find(x => x.color == value));
         }

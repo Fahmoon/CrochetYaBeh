@@ -78,6 +78,7 @@ public class LevelHandler : MonoBehaviour
         _levelProgression.ColorAndPercents.Clear();
         _levelProgression.StarsCount = -1;
         _levelProgression.Progress = 0;
+        _modelMeshFilter.mesh = currentLevelReference.Mesh;
         _levelProgression.IsPainting = false;
         OnColorChanging(new ColorAndPercent(_levelReference.RefColorsWithPercents[0]));
 
@@ -129,7 +130,7 @@ public class LevelHandler : MonoBehaviour
     private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
     {
         List<Vector3> worldPoints = new List<Vector3>();
-        Vector3 lastPos = new Vector3(0f,0f,0f);
+        Vector3 lastPos = new Vector3(0.07f, -0.07f, 0);
 
         int textureWidth = texture2D.width,
             textureHeight = texture2D.height;
