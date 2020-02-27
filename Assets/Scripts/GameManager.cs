@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject myRope;
     [SerializeField] GameObject myKnittedObject;
     [SerializeField] ParticleSystem winConfetti;
+    [SerializeField] Transform characterHead;
+    [SerializeField] Animator characterAnimator;
     private bool gameOverRoutineStarted;
 
     public LevelReference CurrentLevelReferenceSO
@@ -95,6 +97,11 @@ public class GameManager : MonoBehaviour
     }
     IEnumerator CharacterEntranceRoutine()
     {
-        yield return null;
+        myKnittedObject.transform.parent = characterHead.transform;
+        myKnittedObject.transform.localPosition = Vector3.up * 0.05f;
+        myKnittedObject.transform.localScale = Vector3.one * 2;
+        characterAnimator.gameObject.SetActive(true);
+        yield return new WaitForSeconds(6);
+        uIHandler.EnableGameOverPanel();
     }
 }

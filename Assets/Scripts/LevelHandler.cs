@@ -111,8 +111,9 @@ public class LevelHandler : MonoBehaviour
         }
 
         _myTex = TransferAlpha(_modelTex);
-        _uvFilledPoints = _modelUVFilled.UVs;
-        _mappedPoints = _modelUVFilled.MappedPoints;
+        //_uvFilledPoints = _modelUVFilled.UVs;
+        //_mappedPoints = _modelUVFilled.MappedPoints;
+        _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter,_myTex, _knittingStep);
 
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
@@ -126,6 +127,35 @@ public class LevelHandler : MonoBehaviour
         _myLine.startColor = color.color;
         _myLine.endColor = color.color;
         _myYarnBall.color = color.color;
+    }
+    private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
+    {
+        List<Vector3> worldPoints = new List<Vector3>();
+        Vector3 lastPos = new Vector3(0f,0f,0f);
+
+        int textureWidth = texture2D.width,
+            textureHeight = texture2D.height;
+
+        if (textureHeight != textureWidth)
+            return null;
+
+        for (int i = 0; i < textureWidth; i += knittingSpeed)
+        {
+            for (int j = 0; j < textureHeight; j += knittingSpeed)
+            {
+                Vector3[] points = modelMesh.mesh.GetMappedPoints(new Vector2(j * 1.0f / textureWidth, i * 1.0f / textureHeight));
+
+                if (points.Length <= 0)
+                    worldPoints.Add(lastPos);
+                else
+                {
+                    worldPoints.Add(points[0]);
+                    lastPos = points[0];
+                }
+            }
+        }
+        worldPoints.RemoveAt(0);
+        return worldPoints;
     }
     private void UpdateStars()
     {
