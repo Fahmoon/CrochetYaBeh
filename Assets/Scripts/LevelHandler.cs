@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -49,9 +48,13 @@ public class LevelHandler : MonoBehaviour
     private Texture2D               _modelTex;
     [SerializeField]
     private Material                _material;
-
+    [SerializeField]
+    private ModelFilledUV           _modelUVFilled;
+    
     private List<ColorAndPercent>   _levelColors = new List<ColorAndPercent>();
     private List<Vector3>           _modelMappedPoints = new List<Vector3>();
+    [SerializeField]
+    private List<Vector2>           _uvFilledPoints = new List<Vector2>();
     private Texture2D               _myTex;
     private int                     _progessCounter;
     private float                   _pixelsCount;
@@ -108,10 +111,9 @@ public class LevelHandler : MonoBehaviour
         }
 
         _myTex = TransferAlpha(_modelTex);
-        _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter, _myTex, _knittingStep);
-        if (_mappedPoints == null) return;
-        _mappedPointsMax = _mappedPoints.Count;
-        _mappedPointsCounter = 0;
+        _uvFilledPoints = _modelUVFilled.UVs;
+        _mappedPoints = _modelUVFilled.MappedPoints;
+
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);
     }
@@ -124,52 +126,6 @@ public class LevelHandler : MonoBehaviour
         _myLine.startColor = color.color;
         _myLine.endColor = color.color;
         _myYarnBall.color = color.color;
-    }
-    private void GetAllTextures(GameObject obj)
-    {
-        List<Texture> allTexture = new List<Texture>();
-
-        Material sharedMaterial = obj.GetComponent<Renderer>().sharedMaterial;
-        Shader shader = sharedMaterial.shader;
-
-        for (int i = 0; i < ShaderUtil.GetPropertyCount(shader); i++)
-        {
-            if (ShaderUtil.GetPropertyType(shader, i) == ShaderUtil.ShaderPropertyType.TexEnv)
-            {
-                Texture texture = sharedMaterial.GetTexture(ShaderUtil.GetPropertyName(shader, i));
-                allTexture.Add(texture);
-            }
-        }
-        Debug.Log("All Textures Count: " + allTexture.Count);
-    }
-    private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
-    {
-        List<Vector3> worldPoints = new List<Vector3>();
-        Vector3 lastPos = new Vector3(0f,0f,0f);
-
-        int textureWidth = texture2D.width,
-            textureHeight = texture2D.height;
-
-        if (textureHeight != textureWidth)
-            return null;
-
-        for (int i = 0; i < textureWidth; i += knittingSpeed)
-        {
-            for (int j = 0; j < textureHeight; j += knittingSpeed)
-            {
-                Vector3[] points = modelMesh.mesh.GetMappedPoints(new Vector2(j * 1.0f / textureWidth, i * 1.0f / textureHeight));
-
-                if (points.Length <= 0)
-                    worldPoints.Add(lastPos);
-                else
-                {
-                    worldPoints.Add(points[0]);
-                    lastPos = points[0];
-                }
-            }
-        }
-        worldPoints.RemoveAt(0);
-        return worldPoints;
     }
     private void UpdateStars()
     {
@@ -214,12 +170,74 @@ public class LevelHandler : MonoBehaviour
         B.Apply();
         return B;
     }
+    private Color[] GetPixels(Texture2D texture2D, int startIndex, int range)
+    {
+        List<Color> colors = new List<Color>();
+
+        int width = texture2D.width;
+        for (int i = 0; i < range; i++)
+            for (int j = 0; j < range; j++)
+                colors.Add(texture2D.GetPixel(Mathf.RoundToInt(_uvFilledPoints[i + startIndex].x * width), Mathf.RoundToInt(_uvFilledPoints[j + startIndex].y * width)));
+        
+        return colors.ToArray();
+    }
+    private void SetPixels(Texture2D texture2D, int startIndex, int range, Color[] colors)
+    {
+        int width = texture2D.width, counter = 0;
+        for (int i = 0; i < range; i++)
+        {
+            for (int j = 0; j < range; j++)
+            {
+                texture2D.SetPixel(Mathf.RoundToInt(_uvFilledPoints[i + startIndex].x * width), Mathf.RoundToInt(_uvFilledPoints[j + startIndex].y * width), colors[counter]);
+                counter++;
+            }
+        }
+        texture2D.Apply();
+    }
     #endregion
     #region Coroutines
+    private IEnumerator ChangeMyAlphaSecondMethod(Texture2D A, float alpha)
+    {
+        Color[] pixA;
+        int _newMax = _uvFilledPoints.Count, _newCounter = 0;
+        
+        while(_newCounter < _newMax)
+        {
+            if(_levelProgression.IsPainting)
+            {
+                pixA = GetPixels(_modelTex, _newCounter, _knittingStep);
+                _progessCounter += _knittingStep;
+
+                _currentColor.pixelsCounter += _knittingStep;
+                _currentColor.percent = (_currentColor.pixelsCounter / _newMax) * 100f;
+
+                CURRENT_PIXEL_POSITION = _mappedPoints[_newCounter];
+
+                for (int i = 0; i < _knittingStep; i++)
+                {
+                    pixA[i].r *= _currentColor.color.r;
+                    pixA[i].g *= _currentColor.color.g;
+                    pixA[i].b *= _currentColor.color.b;
+                    pixA[i].a  = Mathf.Clamp01(alpha);
+                }
+                SetPixels(A, _newCounter, _knittingStep, pixA);
+                yield return new WaitForFixedUpdate();
+                UpdateStars();
+                _newCounter += _knittingStep;
+                
+                _levelProgression.Progress = _progessCounter * 1.0f / _newMax;
+            }
+            else
+            {
+                yield return new WaitForFixedUpdate();
+                yield return null;
+            }
+        }
+    }
     private IEnumerator ChangeMyAlpha(Texture2D A, float alpha)
     {
         Color[] pixA;
-        float texWidth = A.width, texHeight = A.height,heightIterator = 0, widthIterator;
+        float texWidth = A.width, texHeight = A.height, heightIterator = 0, widthIterator;
         int _pixelsBatch = _knittingStep * _knittingStep;
         _pixelsCount = texHeight * texWidth;
 
@@ -242,7 +260,7 @@ public class LevelHandler : MonoBehaviour
                     _currentColor.percent = (_currentColor.pixelsCounter / _pixelsCount) * 100f;
 
                     CURRENT_PIXEL_POSITION = _mappedPoints[_mappedPointsCounter];
-                    
+
 
                     for (int i = 0; i < _pixelsBatch; i++)
                     {
@@ -257,7 +275,7 @@ public class LevelHandler : MonoBehaviour
                     yield return new WaitForFixedUpdate();
                     UpdateStars();
                     widthIterator += _knittingStep;
-                    if(_mappedPointsCounter<_mappedPointsMax-1)
+                    if (_mappedPointsCounter < _mappedPointsMax - 1)
                         _mappedPointsCounter++;
                     _levelProgression.Progress = _progessCounter / _pixelsCount;
                 }
