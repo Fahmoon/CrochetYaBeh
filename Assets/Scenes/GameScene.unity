@@ -1532,6 +1532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _knittingStep: 16
+  _knittingHeightDelay: 0.1
   _levelButtons:
   - {fileID: 1657335150}
   - {fileID: 421860308}
@@ -1544,6 +1545,8 @@ MonoBehaviour:
   _modelMeshFilter: {fileID: 2009451330}
   _modelTex: {fileID: 2800000, guid: 0bb140144fdd845519341337b019c4d7, type: 3}
   _material: {fileID: 2100000, guid: 2975b46f5cb3a47b8a0f40107ea39eff, type: 2}
+  _modelUVFilled: {fileID: 0}
+  _uvFilledPoints: []
   _mappedPoints: []
 --- !u!1 &1808995060 stripped
 GameObject:

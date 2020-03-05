@@ -29,6 +29,8 @@ public class LevelHandler : MonoBehaviour
     [SerializeField, Range(1, 100)]
     private int                     _knittingStep;
     [SerializeField]
+    private float                   _knittingHeightDelay;
+    [SerializeField]
     private List<Image>             _levelButtons;
     [SerializeField]
     private LevelProgression        _levelProgression;
@@ -282,6 +284,7 @@ public class LevelHandler : MonoBehaviour
         {
             widthIterator = 0;
             pixA = null;
+            yield return new WaitForSeconds(_knittingHeightDelay);
             while (widthIterator < texWidth)
             {
                 if (_levelProgression.IsPainting)
