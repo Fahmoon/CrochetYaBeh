@@ -909,6 +909,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelReferencesSO:
   - {fileID: 11400000, guid: f0857e535ce054738b85ecfba973ed94, type: 2}
+  - {fileID: 11400000, guid: 6d6df4206297749198d372e27b00633b, type: 2}
   levelProgressionSO: {fileID: 11400000, guid: 47ae41a0c26a74f20b8dd7a71c42e8d0, type: 2}
   currentState: 0
   referenceUpdated:
@@ -974,7 +975,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: -7614746292426391427, guid: 5dd37a5cf902a4631867e03e2b0b6e5c,
+      objectReference: {fileID: -5428785827807476984, guid: c1fa00fcb861149c5b3ae4724ad24215,
         type: 3}
     - target: {fileID: -4216859302048453862, guid: 543a2fef188a44c5fbd33e729cc428a8,
         type: 3}
@@ -1064,7 +1065,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1795615364}
   m_Father: {fileID: 1745899704}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1553,11 +1555,90 @@ MonoBehaviour:
   _myYarnBall: {fileID: 934741911}
   _model: {fileID: 2009451328}
   _modelMeshFilter: {fileID: 2009451330}
+  _ghostMeshFiler: {fileID: 1795615366}
   _modelTex: {fileID: 2800000, guid: 0bb140144fdd845519341337b019c4d7, type: 3}
   _material: {fileID: 2100000, guid: 2975b46f5cb3a47b8a0f40107ea39eff, type: 2}
   _modelUVFilled: {fileID: 0}
   _uvFilledPoints: []
   _mappedPoints: []
+--- !u!1 &1795615363
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1795615364}
+  - component: {fileID: 1795615366}
+  - component: {fileID: 1795615365}
+  m_Layer: 1
+  m_Name: ObjectToCrochet (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1795615364
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795615363}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.99, y: 0.99, z: 0.99}
+  m_Children: []
+  m_Father: {fileID: 1264230878}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &1795615365
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795615363}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 708e0101bd7da4acc8f2399d04a08243, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!33 &1795615366
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1795615363}
+  m_Mesh: {fileID: -5428785827807476984, guid: c1fa00fcb861149c5b3ae4724ad24215, type: 3}
 --- !u!1 &1808995060 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2896575487579691180, guid: 955e244e9cb4749e5b0afec5a33ddba1,
@@ -1899,7 +1980,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 1264230877}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2009451328}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: -5428785827807476984, guid: c1fa00fcb861149c5b3ae4724ad24215, type: 3}
 --- !u!114 &2009451331
 MonoBehaviour:
   m_ObjectHideFlags: 0

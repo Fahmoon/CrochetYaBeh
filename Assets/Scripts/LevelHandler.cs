@@ -45,6 +45,8 @@ public class LevelHandler : MonoBehaviour
     [SerializeField]
     private MeshFilter              _modelMeshFilter;
     [SerializeField]
+    private MeshFilter              _ghostMeshFiler;
+    [SerializeField]
     private Texture2D               _modelTex;
     [SerializeField]
     private Material                _material;
@@ -82,6 +84,7 @@ public class LevelHandler : MonoBehaviour
         _levelProgression.StarsCount = -1;
         _levelProgression.Progress = 0;
         _modelMeshFilter.mesh = currentLevelReference.Mesh;
+        _ghostMeshFiler.mesh = currentLevelReference.Mesh;
         _levelProgression.IsPainting = false;
         OnColorChanging(new ColorAndPercent(_levelReference.RefColorsWithPercents[0]));
 
