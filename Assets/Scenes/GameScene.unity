@@ -1545,6 +1545,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _knittingStep: 16
+  _knittingHeightDelay: 0.1
   _levelButtons:
   - {fileID: 1657335150}
   - {fileID: 421860308}
