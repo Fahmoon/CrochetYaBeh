@@ -23,42 +23,59 @@ public class Rope : MonoBehaviour
     LineRenderer myLR;
     List<RopeSegment> ropeSegments = new List<RopeSegment>();
     Camera myCam;
+    bool firstTime;
     private void Start()
     {
         myCam = Camera.main;
         myLR = GetComponent<LineRenderer>();
-     Vector3 startPoint = anchor.position;
+        Vector3 startPoint = anchor.position;
         for (int i = 0; i < ropeLength; i++)
         {
             ropeSegments.Add(new RopeSegment(startPoint));
             startPoint.y -= ropeSegmentLength;
         }
+        gameObject.SetActive(false);
     }
+ 
     void SimulateRope()
     {
         Vector3 gravity = new Vector2(0, -ropeGravity);
         //Simulation
-        for (int i = 0; i < ropeLength; i++)
-        {
-            RopeSegment firstSegment = ropeSegments[i];
-            Vector3 velocity = firstSegment.currentPos - firstSegment.prevPos;
-            firstSegment.prevPos = firstSegment.currentPos;
-            firstSegment.currentPos += velocity + (gravity * Time.deltaTime);
-            ropeSegments[i] = firstSegment;
-        }
+
+            for (int i = 0; i < ropeLength; i++)
+            {
+                RopeSegment firstSegment = ropeSegments[i];
+                Vector3 velocity = firstSegment.currentPos - firstSegment.prevPos;
+                firstSegment.prevPos = firstSegment.currentPos;
+                firstSegment.currentPos += velocity + (gravity * Time.deltaTime);
+                ropeSegments[i] = firstSegment;
+            }
 
         //Constraints
-        for (int i = 0; i < 20; i++)
+
+        if (!firstTime)
         {
-            ApplyConstraints();
+            for (int i = 0; i < 20; i++)
+            {
+                ApplyConstraints();
+            }
         }
+        else
+        {
+            for (int i = 0; i < 200; i++)
+            {
+                ApplyConstraints();
+            }
+            firstTime = true;
+        }
+    
     }
 
     private void ApplyConstraints()
     {
 
         RopeSegment firstSegment = ropeSegments[0];
-    
+
         firstSegment.currentPos = anchor.position;
         ropeSegments[0] = firstSegment;
         RopeSegment lastSegment = ropeSegments[ropeSegments.Count - 1];
@@ -76,7 +93,7 @@ public class Rope : MonoBehaviour
             Vector3 changeAmount = changeDir * error;
             if (i != 0)
             {
-                firstSeg.currentPos =Vector3.MoveTowards(firstSeg.currentPos,firstSeg.currentPos- changeAmount * 0.5f,0.5f);
+                firstSeg.currentPos = Vector3.MoveTowards(firstSeg.currentPos, firstSeg.currentPos - changeAmount * 0.5f, 0.5f);
                 ropeSegments[i] = firstSeg;
                 secondSeg.currentPos = Vector3.MoveTowards(secondSeg.currentPos, secondSeg.currentPos + changeAmount * 0.5f, 0.5f);
                 ropeSegments[i + 1] = secondSeg;
@@ -108,5 +125,5 @@ public class Rope : MonoBehaviour
         DrawRope();
         SimulateRope();
     }
-  
+
 }
