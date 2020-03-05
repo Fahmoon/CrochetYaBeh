@@ -115,6 +115,9 @@ public class LevelHandler : MonoBehaviour
         //_uvFilledPoints = _modelUVFilled.UVs;
         //_mappedPoints = _modelUVFilled.MappedPoints;
         _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter,_myTex, _knittingStep);
+        if (_mappedPoints == null) return;
+        _mappedPointsMax = _mappedPoints.Count;
+        _mappedPointsCounter = 0;
 
         _material.mainTexture = _myTex;
         ManipulateAlpha(_myTex, 0f);

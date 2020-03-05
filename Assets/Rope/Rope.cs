@@ -27,7 +27,7 @@ public class Rope : MonoBehaviour
     {
         myCam = Camera.main;
         myLR = GetComponent<LineRenderer>();
-        Vector3 startPoint = anchor.position;
+     Vector3 startPoint = anchor.position;
         for (int i = 0; i < ropeLength; i++)
         {
             ropeSegments.Add(new RopeSegment(startPoint));

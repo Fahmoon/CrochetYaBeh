@@ -4,7 +4,7 @@
 # To import these sprites into your Unity project, download "TexturePackerImporter":
 # https://www.codeandweb.com/texturepacker/unity
 #
-# $TexturePacker:SmartUpdate:18c3682ab788ffecd3feb59a533f2847:fe263858e3c7d25da99bc897f93a6813:45898c7b4559d825aca92d52a93906cd$
+# $TexturePacker:SmartUpdate:54d85905f1b3ff7450bd0a0cc9ac8c3d:e2492964d267b63200c585bf6e3f2d86:45898c7b4559d825aca92d52a93906cd$
 #
 :format=40300
 :texture=knit.png
@@ -17,7 +17,7 @@ button;475;1461;297;316; 0.5;0.5; 0;0;0;0
 color;876;1779;267;267; 0.5;0.5; 0;0;0;0
 done;1087;1533;481;244; 0.5;0.5; 0;0;0;0
 loading;1145;1976;471;70; 0.5;0.5; 0;0;0;0
-logo;2;835;967;607; 0.5;0.5; 0;0;0;0
+logo;2;821;1033;621; 0.5;0.5; 0;0;0;0
 match it;774;1444;311;333; 0.5;0.5; 0;0;0;0
 progress;2;1707;471;70; 0.5;0.5; 0;0;0;0
 replay;214;1867;179;179; 0.5;0.5; 0;0;0;0
