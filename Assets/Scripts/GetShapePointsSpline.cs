@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using PathCreation.Examples;
 
 
 public class GetShapePointsSpline : MonoBehaviour

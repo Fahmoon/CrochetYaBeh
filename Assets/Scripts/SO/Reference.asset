@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Reference
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: f3d1273807399444a97b73f0b39530c1, type: 3}
-  _mesh: {fileID: -3809196284795086846, guid: 47c7b0e7216d84d8babe86095d66233c, type: 3}
+  _mesh: {fileID: -7614746292426391427, guid: 41416aebde879497fbd308e724f0537c, type: 3}
   _colorAndPercents:
   - color: {r: 0.9339623, g: 0.9249266, b: 0.048460312, a: 1}
     percent: 40
