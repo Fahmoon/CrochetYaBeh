@@ -7,7 +7,7 @@ using System.Linq;
 public class GetShapePointsSpline : MonoBehaviour
 {
     [SerializeField] Animator yarnBallAnimator;
-    [SerializeField] Animator needleAnimator;
+    public Animator needleAnimator;
     public LevelProgression myScriptableObject;
     public static GetShapePointsSpline instance;
     public Transform anchor;
@@ -29,10 +29,13 @@ public class GetShapePointsSpline : MonoBehaviour
         {
             knitting = false;
             yarnBallAnimator.enabled = false;
-            needleAnimator.enabled = false;
+           // needleAnimator.enabled = false;
         }
     }
-  
+  public void StopHookAnimations()
+    {
+        needleAnimator.enabled = false;
+    }
     void FixedUpdate()
     {
         if (knitting)

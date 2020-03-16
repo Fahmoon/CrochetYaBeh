@@ -15,7 +15,8 @@ public class GameManager : MonoBehaviour
     public GameStates currentState;
     public ReferenceUpdated referenceUpdated = new ReferenceUpdated();
     [SerializeField] GameObject yarnBall;
-    [SerializeField] GameObject needle;
+    [SerializeField] GameObject hook;
+    [SerializeField] GameObject finger;
     [SerializeField] GameObject myRope;
     [SerializeField] GameObject myKnittedObject;
     [SerializeField] ParticleSystem winConfetti;
@@ -67,7 +68,8 @@ public class GameManager : MonoBehaviour
     {
         yarnBall.SetActive(false);
         myRope.SetActive(false);
-        needle.SetActive(false);
+        finger.SetActive(false);
+        hook.SetActive(false);
         ////
         float timeStamp = Time.time;
         float totalRotateDuration = 4;

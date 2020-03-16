@@ -20,6 +20,8 @@ public class Rope : MonoBehaviour
     [SerializeField] float ropeGravity = 9.81f;
     [SerializeField] Transform anchor;
     [SerializeField] Transform start;
+    [SerializeField] Transform finger;
+    [SerializeField] Transform hook;
     LineRenderer myLR;
     List<RopeSegment> ropeSegments = new List<RopeSegment>();
     Camera myCam;
@@ -75,9 +77,17 @@ public class Rope : MonoBehaviour
     {
 
         RopeSegment firstSegment = ropeSegments[0];
-
         firstSegment.currentPos = anchor.position;
         ropeSegments[0] = firstSegment;
+
+        RopeSegment hookSegment = ropeSegments[ropeSegments.Count /6];
+        hookSegment.currentPos = hook.position;
+        ropeSegments[ropeSegments.Count / 6] = hookSegment;
+
+        RopeSegment fingerSegment = ropeSegments[ropeSegments.Count /2];
+        fingerSegment.currentPos = finger.position;
+        ropeSegments[ropeSegments.Count / 2] = fingerSegment;
+
         RopeSegment lastSegment = ropeSegments[ropeSegments.Count - 1];
         lastSegment.currentPos = start.position;
         ropeSegments[ropeSegments.Count - 1] = lastSegment;

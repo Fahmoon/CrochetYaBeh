@@ -22,49 +22,51 @@ public class ColorAndPercent
 public class LevelHandler : MonoBehaviour
 {
     #region Static Public Fields
-    public static Vector3           CURRENT_PIXEL_POSITION;
+    public static Vector3 CURRENT_PIXEL_POSITION;
     #endregion
     #region Private Fields
     [Header("LEVEL CONSTs")]
     [SerializeField, Range(1, 100)]
-    private int                     _knittingStep;
+    private int _knittingStep;
+    [SerializeField, Range(1, 100)]
+    private int _knittingHeight;
     [SerializeField]
-    private float                   _knittingHeightDelay;
+    private float _knittingHeightDelay;
     [SerializeField]
-    private List<Image>             _levelButtons;
+    private List<Image> _levelButtons;
     [SerializeField]
-    private LevelProgression        _levelProgression;
+    private LevelProgression _levelProgression;
     [SerializeField]
-    private LevelReference          _levelReference;
+    private LevelReference _levelReference;
     [SerializeField]
-    private LineRenderer            _myLine;
+    private LineRenderer _myLine;
     [SerializeField]
-    private SpriteRenderer          _myYarnBall;
+    private SpriteRenderer _myYarnBall;
     [Space]
     [Header("MODEL VARs")]
     [SerializeField]
-    private GameObject              _model;
+    private GameObject _model;
     [SerializeField]
-    private MeshFilter              _modelMeshFilter;
+    private MeshFilter _modelMeshFilter;
     [SerializeField]
-    private MeshFilter              _ghostMeshFiler;
+    private MeshFilter _ghostMeshFiler;
     [SerializeField]
-    private Texture2D               _modelTex;
+    private Texture2D _modelTex;
     [SerializeField]
-    private Material                _material;
+    private Material _material;
     [SerializeField]
-    private ModelFilledUV           _modelUVFilled;
-    
-    private List<ColorAndPercent>   _levelColors = new List<ColorAndPercent>();
-    private List<Vector3>           _modelMappedPoints = new List<Vector3>();
+    private ModelFilledUV _modelUVFilled;
+
+    private List<ColorAndPercent> _levelColors = new List<ColorAndPercent>();
+    private List<Vector3> _modelMappedPoints = new List<Vector3>();
     [SerializeField]
-    private List<Vector2>           _uvFilledPoints = new List<Vector2>();
-    private Texture2D               _myTex;
-    private int                     _progessCounter;
-    private float                   _pixelsCount;
-    private ColorAndPercent         _currentColor;
-    [SerializeField] private List<Vector3>           _mappedPoints = new List<Vector3>();
-    private int                     _mappedPointsCounter, _mappedPointsMax;
+    private List<Vector2> _uvFilledPoints = new List<Vector2>();
+    private Texture2D _myTex;
+    private int _progessCounter;
+    private float _pixelsCount;
+    private ColorAndPercent _currentColor;
+    [SerializeField] private List<Vector3> _mappedPoints = new List<Vector3>();
+    private int _mappedPointsCounter, _mappedPointsMax;
     //private bool                    _gotProgressStar;
     #endregion
     #region MonoBehavior Callbacks
@@ -119,7 +121,7 @@ public class LevelHandler : MonoBehaviour
         _myTex = TransferAlpha(_modelTex);
         //_uvFilledPoints = _modelUVFilled.UVs;
         //_mappedPoints = _modelUVFilled.MappedPoints;
-        _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter,_myTex, _knittingStep);
+        _mappedPoints = GetModelWorldPositionPointsBasedOnKnittingSpeed(_modelMeshFilter, _myTex, _knittingStep,_knittingHeight);
         if (_mappedPoints == null) return;
         _mappedPointsMax = _mappedPoints.Count;
         _mappedPointsCounter = 0;
@@ -137,10 +139,10 @@ public class LevelHandler : MonoBehaviour
         _myLine.endColor = color.color;
         _myYarnBall.color = color.color;
     }
-    private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed)
+    private List<Vector3> GetModelWorldPositionPointsBasedOnKnittingSpeed(MeshFilter modelMesh, Texture2D texture2D, int knittingSpeed,int knittingHeightSpeed)
     {
         List<Vector3> worldPoints = new List<Vector3>();
-        Vector3 lastPos = new Vector3(0.07f, -0.07f, 0);
+        Vector3 lastPos = new Vector3(-0.006f, 0.006f, 0);
 
         int textureWidth = texture2D.width,
             textureHeight = texture2D.height;
@@ -148,7 +150,7 @@ public class LevelHandler : MonoBehaviour
         if (textureHeight != textureWidth)
             return null;
 
-        for (int i = 0; i < textureWidth; i += knittingSpeed)
+        for (int i = 0; i < textureWidth; i += knittingHeightSpeed)
         {
             for (int j = 0; j < textureHeight; j += knittingSpeed)
             {
@@ -164,7 +166,17 @@ public class LevelHandler : MonoBehaviour
             }
         }
         worldPoints.RemoveAt(0);
+        AdjustPoints(modelMesh.transform, ref worldPoints);
         return worldPoints;
+    }
+    void AdjustPoints(Transform transfromToAdjustTo, ref List<Vector3> pointsToAdjust)
+    {
+        for (int i = 0; i < pointsToAdjust.Count; i++)
+        {
+            pointsToAdjust[i] += transfromToAdjustTo.position;
+            pointsToAdjust[i] = transfromToAdjustTo.rotation * pointsToAdjust[i];
+            pointsToAdjust[i] *= transfromToAdjustTo.lossyScale.x;
+        }
     }
     private void UpdateStars()
     {
@@ -217,7 +229,7 @@ public class LevelHandler : MonoBehaviour
         for (int i = 0; i < range; i++)
             for (int j = 0; j < range; j++)
                 colors.Add(texture2D.GetPixel(Mathf.RoundToInt(_uvFilledPoints[i + startIndex].x * width), Mathf.RoundToInt(_uvFilledPoints[j + startIndex].y * width)));
-        
+
         return colors.ToArray();
     }
     private void SetPixels(Texture2D texture2D, int startIndex, int range, Color[] colors)
@@ -238,11 +250,11 @@ public class LevelHandler : MonoBehaviour
     private IEnumerator ChangeMyAlphaSecondMethod(Texture2D A, float alpha)
     {
         Color[] pixA;
-        int _newMax = _uvFilledPoints.Count, _newCounter = 0;
-        
-        while(_newCounter < _newMax)
+        int _newMax = _uvFilledPoints.Count, _newCounter = 1;
+
+        while (_newCounter < _newMax)
         {
-            if(_levelProgression.IsPainting)
+            if (_levelProgression.IsPainting)
             {
                 pixA = GetPixels(_modelTex, _newCounter, _knittingStep);
                 _progessCounter += _knittingStep;
@@ -257,13 +269,13 @@ public class LevelHandler : MonoBehaviour
                     pixA[i].r *= _currentColor.color.r;
                     pixA[i].g *= _currentColor.color.g;
                     pixA[i].b *= _currentColor.color.b;
-                    pixA[i].a  = Mathf.Clamp01(alpha);
+                    pixA[i].a = Mathf.Clamp01(alpha);
                 }
                 SetPixels(A, _newCounter, _knittingStep, pixA);
                 yield return new WaitForFixedUpdate();
                 UpdateStars();
                 _newCounter += _knittingStep;
-                
+
                 _levelProgression.Progress = _progessCounter * 1.0f / _newMax;
             }
             else
@@ -277,7 +289,7 @@ public class LevelHandler : MonoBehaviour
     {
         Color[] pixA;
         float texWidth = A.width, texHeight = A.height, heightIterator = 0, widthIterator;
-        int _pixelsBatch = _knittingStep * _knittingStep;
+        int _pixelsBatch = _knittingStep * _knittingHeight;
         _pixelsCount = texHeight * texWidth;
 
         if ((int)texWidth != (int)texHeight || (int)texWidth % _knittingStep != 0)
@@ -292,7 +304,7 @@ public class LevelHandler : MonoBehaviour
             {
                 if (_levelProgression.IsPainting)
                 {
-                    pixA = _modelTex.GetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep);
+                    pixA = _modelTex.GetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingHeight);
 
                     _progessCounter += _pixelsBatch;
 
@@ -310,7 +322,7 @@ public class LevelHandler : MonoBehaviour
                         pixA[i].a = Mathf.Clamp01(alpha);
                     }
 
-                    A.SetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingStep, pixA);
+                    A.SetPixels((int)widthIterator, (int)heightIterator, _knittingStep, _knittingHeight, pixA);
                     A.Apply();
                     yield return new WaitForFixedUpdate();
                     UpdateStars();
@@ -325,7 +337,7 @@ public class LevelHandler : MonoBehaviour
                     yield return null;
                 }
             }
-            heightIterator += _knittingStep;
+            heightIterator += _knittingHeight;
         }
     }
     #endregion

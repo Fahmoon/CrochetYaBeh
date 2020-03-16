@@ -1,8 +1,11 @@
 fileFormatVersion: 2
-guid: 13d39776e3db54b79b084f1fdd52f622
+guid: ada35d887378c4053a53275e6ae7738c
 ModelImporter:
   serializedVersion: 26
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      74: -2653182694737797582
+    second: knitting_hook02
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -31,7 +34,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 1
+    isReadable: 0
   meshes:
     lODScreenPercentages: []
     globalScale: 1
@@ -87,7 +90,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

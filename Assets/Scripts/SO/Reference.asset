@@ -13,18 +13,18 @@ MonoBehaviour:
   m_Name: Reference
   m_EditorClassIdentifier: 
   _sprite: {fileID: 21300000, guid: f3d1273807399444a97b73f0b39530c1, type: 3}
-  _mesh: {fileID: -7614746292426391427, guid: 41416aebde879497fbd308e724f0537c, type: 3}
+  _mesh: {fileID: -7843526606762953986, guid: 15c1fb54974e443b7afc46879164dfbb, type: 3}
   _colorAndPercents:
-  - color: {r: 0.9339623, g: 0.9249266, b: 0.048460312, a: 1}
-    percent: 40
+  - color: {r: 0.6, g: 0.5180488, b: 0.36, a: 1}
+    percent: 33
     pixelsCounter: 211200
     compared: 0
-  - color: {r: 0.19239536, g: 0.5283019, b: 0.01744394, a: 1}
-    percent: 40
+  - color: {r: 0.42075464, g: 0.6, b: 0.36, a: 1}
+    percent: 33
     pixelsCounter: 0
     compared: 0
-  - color: {r: 0.8679245, g: 0.06785718, b: 0.05322181, a: 1}
-    percent: 20
+  - color: {r: 0.590196, g: 0.41862744, b: 0.7, a: 1}
+    percent: 34
     pixelsCounter: 0
     compared: 0
   _clearnce: 5
